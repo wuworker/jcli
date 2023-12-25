@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# jcli家目录
+if [[ -z $JCLI_HOME ]];then
+  JCLI_HOME=$(dirname $(cd "$(dirname "$0")";pwd))
+fi
+
+# 加载环境变量
+JAVA_ENV=$JCLI_HOME/bin/java-env.sh
+if [[ -f $JAVA_ENV ]];then
+  . $JAVA_ENV
+fi
+
+EXEC=java
+if [[ -n $JAVA_HOME ]];then
+  EXEC=$JAVA_HOME/bin/java
+fi
+
+#jar文件
+JAR_FILE=$JCLI_HOME/lib/__need_replace_jarfile__
+
+$EXEC $JAVA_OPTS -jar $JAR_FILE "$@"
