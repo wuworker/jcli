@@ -1,6 +1,5 @@
 package com.wxl.jcli;
 
-import org.apache.commons.cli.CommandLine;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.function.Function;
@@ -16,7 +15,7 @@ public abstract class AbstractCommand implements Command {
      * 获取选项名
      */
     public String getOptName() {
-        String opt = option().getOpt();
+        var opt = option().getOpt();
         if (StringUtils.isNotBlank(opt)) {
             return opt;
         }
@@ -27,7 +26,7 @@ public abstract class AbstractCommand implements Command {
      * 获取当前选项值
      */
     public String[] getOptValues(CommandContext context) {
-        String opt = getOptName();
+        var opt = getOptName();
         String[] values = context.commandLine().getOptionValues(opt);
         return values == null ? new String[0] : values;
     }
@@ -43,7 +42,7 @@ public abstract class AbstractCommand implements Command {
      * 用户输入的是否包含当前命令
      */
     public boolean isCurrentCommand(CommandContext context) {
-        CommandLine commandLine = context.commandLine();
+        var commandLine = context.commandLine();
         return commandLine.hasOption(getOptName());
     }
 
@@ -55,7 +54,7 @@ public abstract class AbstractCommand implements Command {
      * @param max     最大个数
      */
     public void checkOptionValueLen(CommandContext context, int min, int max) {
-        String[] values = getOptValues(context);
+        var values = getOptValues(context);
         if (values.length < min) {
             throw new IllegalArgumentException("absent value!");
         }
@@ -72,7 +71,7 @@ public abstract class AbstractCommand implements Command {
      * @param max     最大个数
      */
     public void checkArgValueLen(CommandContext context, int min, int max) {
-        String[] args = getCommandArgs(context);
+        var args = getCommandArgs(context);
         if (args.length < min) {
             throw new IllegalArgumentException("absent value!");
         }
@@ -91,7 +90,7 @@ public abstract class AbstractCommand implements Command {
     }
 
     public String getOptionValue(CommandContext context, int index, String defaultVal) {
-        String val = getOptionValue(context, index, false);
+        var val = getOptionValue(context, index, false);
         return val == null ? defaultVal : val;
     }
 
@@ -100,7 +99,7 @@ public abstract class AbstractCommand implements Command {
     }
 
     public Boolean getOptionBoolean(CommandContext context, int index, Boolean defaultVal) {
-        Boolean val = getOptionBoolean(context, index, false);
+        var val = getOptionBoolean(context, index, false);
         return val == null ? defaultVal : val;
     }
 
@@ -109,7 +108,7 @@ public abstract class AbstractCommand implements Command {
     }
 
     public Integer getOptionInteger(CommandContext context, int index, Integer defaultVal) {
-        Integer val = getOptionInteger(context, index, false);
+        var val = getOptionInteger(context, index, false);
         return val == null ? defaultVal : val;
     }
 
@@ -118,7 +117,7 @@ public abstract class AbstractCommand implements Command {
     }
 
     public Long getOptionLong(CommandContext context, int index, Long defaultVal) {
-        Long val = getOptionLong(context, index, false);
+        var val = getOptionLong(context, index, false);
         return val == null ? defaultVal : val;
     }
 
@@ -127,7 +126,7 @@ public abstract class AbstractCommand implements Command {
     }
 
     public Float getOptionFloat(CommandContext context, int index, Float defaultVal) {
-        Float val = getOptionFloat(context, index, false);
+        var val = getOptionFloat(context, index, false);
         return val == null ? defaultVal : val;
     }
 
@@ -136,7 +135,7 @@ public abstract class AbstractCommand implements Command {
     }
 
     public Double getOptionDouble(CommandContext context, int index, Double defaultVal) {
-        Double val = getOptionDouble(context, index, false);
+        var val = getOptionDouble(context, index, false);
         return val == null ? defaultVal : val;
     }
 
@@ -150,7 +149,7 @@ public abstract class AbstractCommand implements Command {
     }
 
     public String getArgValue(CommandContext context, int index, String defaultVal) {
-        String val = getArgValue(context, index, false);
+        var val = getArgValue(context, index, false);
         return val == null ? defaultVal : val;
     }
 
@@ -159,7 +158,7 @@ public abstract class AbstractCommand implements Command {
     }
 
     public Boolean getArgBoolean(CommandContext context, int index, Boolean defaultVal) {
-        Boolean val = getArgBoolean(context, index, false);
+        var val = getArgBoolean(context, index, false);
         return val == null ? defaultVal : val;
     }
 
@@ -168,7 +167,7 @@ public abstract class AbstractCommand implements Command {
     }
 
     public Integer getArgInteger(CommandContext context, int index, Integer defaultVal) {
-        Integer val = getArgInteger(context, index, false);
+        var val = getArgInteger(context, index, false);
         return val == null ? defaultVal : val;
     }
 
@@ -177,7 +176,7 @@ public abstract class AbstractCommand implements Command {
     }
 
     public Long getArgLong(CommandContext context, int index, Long defaultVal) {
-        Long val = getArgLong(context, index, false);
+        var val = getArgLong(context, index, false);
         return val == null ? defaultVal : val;
     }
 
@@ -186,7 +185,7 @@ public abstract class AbstractCommand implements Command {
     }
 
     public Float getArgFloat(CommandContext context, int index, Float defaultVal) {
-        Float val = getArgFloat(context, index, false);
+        var val = getArgFloat(context, index, false);
         return val == null ? defaultVal : val;
     }
 
@@ -195,7 +194,7 @@ public abstract class AbstractCommand implements Command {
     }
 
     public Double getArgDouble(CommandContext context, int index, Double defaultVal) {
-        Double val = getArgDouble(context, index, false);
+        var val = getArgDouble(context, index, false);
         return val == null ? defaultVal : val;
     }
 
@@ -264,7 +263,7 @@ public abstract class AbstractCommand implements Command {
      * @param require 是否必选
      */
     private String getOptionValue(CommandContext context, int index, boolean require) {
-        String[] values = getOptValues(context);
+        var values = getOptValues(context);
         if (index >= values.length) {
             if (require) {
                 throw new IllegalArgumentException("absent value!");
@@ -295,7 +294,7 @@ public abstract class AbstractCommand implements Command {
     }
 
     private <T> T getOptionValue0(CommandContext context, int index, boolean require, Function<String, T> convert) {
-        String val = getOptionValue(context, index, require);
+        var val = getOptionValue(context, index, require);
         if (val == null) {
             return null;
         }
@@ -313,7 +312,7 @@ public abstract class AbstractCommand implements Command {
      * @param require 是否必须
      */
     private String getArgValue(CommandContext context, int index, boolean require) {
-        String[] values = getCommandArgs(context);
+        var values = getCommandArgs(context);
         if (index >= values.length) {
             if (require) {
                 throw new IllegalArgumentException("absent value!");
@@ -344,7 +343,7 @@ public abstract class AbstractCommand implements Command {
     }
 
     private <T> T getArgValue0(CommandContext context, int index, boolean require, Function<String, T> convert) {
-        String val = getArgValue(context, index, require);
+        var val = getArgValue(context, index, require);
         if (val == null) {
             return null;
         }

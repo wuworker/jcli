@@ -21,13 +21,13 @@ public abstract class DateCalculateCommand extends AbstractCommand {
         if (isCurrentCommand(context)) {
             checkOptionValueLen(context, 1, 2);
             // 选项值
-            String[] optValues = getOptValues(context);
+           var optValues = getOptValues(context);
 
-            boolean isTimestamp = false;
+            var isTimestamp = false;
             DateTimeFormatter dateTimeFormatter;
             LocalDateTime dateTime;
             // 最后一个参数为时间单位
-            String unitStr = optValues[optValues.length - 1];
+            var unitStr = optValues[optValues.length - 1];
 
             // 1个参数为单位，时间基数为当前时间
             if (optValues.length == 1) {
@@ -36,7 +36,7 @@ public abstract class DateCalculateCommand extends AbstractCommand {
             }
             // 第一个参数为时间，第二个参数为单位
             else {
-                String dateStr = getOptionValue(context, 0);
+                var dateStr = getOptionValue(context, 0);
                 dateTimeFormatter = context.getAttr(JDateConstant.ATTR_FORMAT);
                 if (dateTimeFormatter != null) {
                     dateTime = JDateUtils.parseDateTime(dateTimeFormatter, dateStr);
@@ -66,8 +66,8 @@ public abstract class DateCalculateCommand extends AbstractCommand {
             Matcher matcher = JDateConstant.JDateUnit.UNIT_REGEX.matcher(unitStr);
 
             while (matcher.find()) {
-                int val = Integer.parseInt(matcher.group(1));
-                JDateConstant.JDateUnit unit = JDateConstant.JDateUnit.parse(matcher.group(2));
+                var val = Integer.parseInt(matcher.group(1));
+                var unit = JDateConstant.JDateUnit.parse(matcher.group(2));
                 dateTime = calculate(dateTime, val, unit);
             }
 

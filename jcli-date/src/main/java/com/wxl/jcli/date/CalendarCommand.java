@@ -3,7 +3,6 @@ package com.wxl.jcli.date;
 import com.wxl.jcli.AbstractCommand;
 import com.wxl.jcli.CommandChain;
 import com.wxl.jcli.CommandContext;
-import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -27,13 +26,13 @@ public class CalendarCommand extends AbstractCommand {
 
     @Override
     public void execute(CommandContext context, CommandChain chain) {
-        CommandLine commandLine = context.commandLine();
+        var commandLine = context.commandLine();
         if (isCurrentCommand(context)) {
             checkOptionValueLen(context, 0, 2);
 
             int year;
             int month;
-            LocalDate now = LocalDate.now();
+            var now = LocalDate.now();
             if (!ArrayUtils.isEmpty(commandLine.getOptionValues("c"))) {
                 year = getRequireOptionInteger(context, 0);
                 month = getRequireOptionInteger(context, 1);
@@ -119,20 +118,11 @@ public class CalendarCommand extends AbstractCommand {
      * @return
      */
     private int getDayOfMonth(int year, int month) {
-        switch (month) {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                return 31;
-            case 2:
-                return IsoChronology.INSTANCE.isLeapYear(year) ? 29 : 28;
-            default:
-                return 30;
-        }
+        return switch (month) {
+            case 1, 3, 5, 7, 8, 10, 12 -> 31;
+            case 2 -> IsoChronology.INSTANCE.isLeapYear(year) ? 29 : 28;
+            default -> 30;
+        };
     }
 
     @Override

@@ -1,8 +1,5 @@
 package com.wxl.jcli.json;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
 import com.wxl.jcli.CommandChain;
 import com.wxl.jcli.CommandContext;
 import org.apache.commons.cli.Option;
@@ -24,11 +21,10 @@ public class ExpandCommand extends JsonCommand {
     @Override
     public void execute(CommandContext context, CommandChain chain) {
         if (isCurrentCommand(context)) {
-            JsonElement element = parseJson(context);
+            var element = parseJson(context);
 
-            GsonBuilder gsonBuilder = getGsonBuilder(context);
-            Gson gson = gsonBuilder.setPrettyPrinting().create();
-            String expandJson = gson.toJson(element);
+            var gson = getGsonBuilder(context).setPrettyPrinting().create();
+            var expandJson = gson.toJson(element);
 
             context.stdout().println(expandJson);
             return;

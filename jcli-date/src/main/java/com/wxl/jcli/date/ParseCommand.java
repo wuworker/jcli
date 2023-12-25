@@ -26,7 +26,7 @@ public class ParseCommand extends AbstractCommand {
     public void execute(CommandContext context, CommandChain chain) {
         if (isCurrentCommand(context)) {
             // 第一个参数，时间
-            String time = getRequireOptionValue(context, 0);
+            var time = getRequireOptionValue(context, 0);
             // 格式化参数
             DateTimeFormatter formatter = context.getAttr(JDateConstant.ATTR_FORMAT);
 
@@ -40,7 +40,7 @@ public class ParseCommand extends AbstractCommand {
                 throw new IllegalArgumentException("parse error by: '" + time + "'");
             }
 
-            long timestamp = JDateUtils.toTimestamp(dateTime);
+            var timestamp = JDateUtils.toTimestamp(dateTime);
             context.stdout().println(timestamp);
             return;
         }

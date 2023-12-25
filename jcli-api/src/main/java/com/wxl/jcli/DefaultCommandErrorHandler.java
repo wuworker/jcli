@@ -12,7 +12,7 @@ public class DefaultCommandErrorHandler implements CommandErrorHandler {
     @Override
     public void handleError(CommandContext context, Command cmd, Throwable error) {
         if (cmd != null) {
-            String tipOpt = getTipOpt(cmd.option());
+            var tipOpt = getTipOpt(cmd.option());
             context.stderr().println("Error option: " + tipOpt + ", " + getCause(error).getMessage());
         } else {
             context.stderr().println(getCause(error).getMessage());
@@ -21,7 +21,7 @@ public class DefaultCommandErrorHandler implements CommandErrorHandler {
 
 
     private String getTipOpt(Option option) {
-        String opt = option.getOpt();
+        var opt = option.getOpt();
         if (StringUtils.isNotBlank(opt)) {
             return "-" + opt;
         }
@@ -30,7 +30,7 @@ public class DefaultCommandErrorHandler implements CommandErrorHandler {
 
 
     private Throwable getCause(Throwable error) {
-        Throwable cause = error.getCause();
+        var cause = error.getCause();
         while (cause != null) {
             error = cause;
             cause = error.getCause();

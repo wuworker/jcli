@@ -20,9 +20,9 @@ public abstract class JsonCommand extends AbstractCommand {
      * json解析
      */
     protected JsonElement parseJson(CommandContext context) {
-        String jsonStr = getRequireArgValue(context, 0);
+        var jsonStr = getRequireArgValue(context, 0);
         if (context.getAttr(JsonConstant.ATTR_LENIENT, false)) {
-            JsonReader reader = new JsonReader(new StringReader(jsonStr));
+            var reader = new JsonReader(new StringReader(jsonStr));
             return JsonParser.parseReader(reader);
         }
         return JsonParser.parseString(jsonStr);
@@ -32,7 +32,7 @@ public abstract class JsonCommand extends AbstractCommand {
      * 获取gson builder
      */
     protected GsonBuilder getGsonBuilder(CommandContext context) {
-        GsonBuilder gsonBuilder = new GsonBuilder();
+        var gsonBuilder = new GsonBuilder();
         if (context.getAttr(JsonConstant.ATTR_NULLABLE, false)) {
             gsonBuilder.serializeNulls();
         }

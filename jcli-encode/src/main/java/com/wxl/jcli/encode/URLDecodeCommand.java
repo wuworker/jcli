@@ -25,10 +25,10 @@ public class URLDecodeCommand extends AbstractCommand {
     @Override
     public void execute(CommandContext context, CommandChain chain) {
         if (isCurrentCommand(context)) {
-            String url = getRequireOptionValue(context, 0);
+            var url = getRequireOptionValue(context, 0);
 
             try {
-                String decodeUrl = URLDecoder.decode(url, JEncodeConstant.DEFAULT_CHARSET);
+                var decodeUrl = URLDecoder.decode(url, JEncodeConstant.DEFAULT_CHARSET);
                 context.stdout().println(decodeUrl);
             } catch (UnsupportedEncodingException e) {
                 throw new IllegalStateException(e);

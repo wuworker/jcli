@@ -12,10 +12,10 @@ import com.wxl.jcli.HelpCommand;
 public class JEncode {
 
     public static void main(String[] args) {
-        HelpCommand helpCommand = new HelpCommand();
+        var helpCommand = new HelpCommand();
         helpCommand.setEnd(true);
 
-        CommandExecutor executor = new CommandExecutorBuilder()
+        var executor = new CommandExecutorBuilder()
                 .setName("jenc")
                 .addCommand(
                         new URLEncodeCommand(),

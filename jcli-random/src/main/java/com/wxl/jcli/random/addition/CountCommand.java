@@ -24,7 +24,7 @@ public class CountCommand extends AbstractCommand {
     public void execute(CommandContext context, CommandChain chain) {
         if (isCurrentCommand(context)) {
             checkOptionValueLen(context, 1, 1);
-            Integer count = getRequireOptionInteger(context, 0);
+            var count = getRequireOptionInteger(context, 0);
             context.setAttr(JRandomConstant.ATTR_COUNT, count);
         }
         chain.doNext(context);

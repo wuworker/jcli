@@ -14,9 +14,9 @@ import com.wxl.jcli.random.addition.*;
 public class JRandom {
 
     public static void main(String[] args) {
-        HelpCommand helpCommand = new HelpCommand();
+        var helpCommand = new HelpCommand();
 
-        CommandExecutor executor = new CommandExecutorBuilder()
+        var executor = new CommandExecutorBuilder()
                 .setName("jrdm")
                 .addCommand(
                         helpCommand,

@@ -78,7 +78,7 @@ public class StringCommand extends AbstractCommand {
         // 候选字符
         String chooseStr = context.getAttr(JRandomConstant.ATTR_CHOOSE);
 
-        List<String> randoms = new ArrayList<>(count);
+        var randoms = new ArrayList<String>(count);
         String randomStr;
         for (int i = 0; i < count; i++) {
             int strLength = RandomUtils.nextInt(min, max);

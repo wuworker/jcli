@@ -5,6 +5,7 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.Options;
 
 import java.io.PrintStream;
+import java.io.Serial;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,7 +66,7 @@ public class CommandExecutor {
      * @param ctxInitializer context初始化
      */
     public void execute(String[] args, Consumer<CommandContext> ctxInitializer) {
-        DefaultCommandContext context = new DefaultCommandContext();
+        var context = new DefaultCommandContext();
         try {
             if (ctxInitializer != null) {
                 ctxInitializer.accept(context);
@@ -77,9 +78,9 @@ public class CommandExecutor {
         } catch (Throwable e) {
             Throwable throwable = e;
             Command cmd = null;
-            if (throwable instanceof ExecuteException) {
-                cmd = ((ExecuteException) throwable).getCommand();
-                throwable = throwable.getCause();
+            if (throwable instanceof ExecuteException exception) {
+                cmd = exception.getCommand();
+                throwable = exception.getCause();
             }
             errorHandler.handleError(context, cmd, throwable);
         }
@@ -115,9 +116,10 @@ public class CommandExecutor {
      */
     private static class ExecuteException extends RuntimeException {
 
+        @Serial
         private static final long serialVersionUID = 2550224515375239796L;
 
-        private Command command;
+        private final Command command;
 
         public ExecuteException(Command command, Throwable cause) {
             super(cause);
@@ -134,7 +136,7 @@ public class CommandExecutor {
      */
     private class DefaultCommandContext implements CommandContext {
 
-        private Map<String, Object> attrMap = new HashMap<>();
+        private final Map<String, Object> attrMap = new HashMap<>();
 
         private CommandLine commandLine;
 

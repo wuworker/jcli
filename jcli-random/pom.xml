@@ -42,7 +42,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>ext/</classpathPrefix>
-                            <mainClass>com.wxl.jcli.json.JJson</mainClass>
+                            <mainClass>com.wxl.jcli.random.JRandom</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

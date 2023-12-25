@@ -1,7 +1,5 @@
 package com.wxl.jcli.json;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.PathNotFoundException;
 import com.wxl.jcli.CommandChain;
@@ -25,11 +23,11 @@ public class PathFilterCommand extends JsonCommand {
     @Override
     public void execute(CommandContext context, CommandChain chain) {
         if (isCurrentCommand(context)) {
-            String path = getRequireOptionValue(context, 0);
+            var path = getRequireOptionValue(context, 0);
 
-            JsonElement element = parseJson(context);
-            Gson gson = getGsonBuilder(context).setPrettyPrinting().create();
-            String jsonStr = gson.toJson(element);
+            var element = parseJson(context);
+            var gson = getGsonBuilder(context).setPrettyPrinting().create();
+            var jsonStr = gson.toJson(element);
 
             try {
                 Object value = JsonPath.read(jsonStr, path);

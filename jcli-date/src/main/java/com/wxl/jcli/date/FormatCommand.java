@@ -26,14 +26,14 @@ public class FormatCommand extends AbstractCommand {
     public void execute(CommandContext context, CommandChain chain) {
         if (isCurrentCommand(context)) {
             // 第一个参数，时间戳
-            long timestamp = getRequireOptionLong(context, 0);
+            var timestamp = getRequireOptionLong(context, 0);
             // 格式化fmt
             DateTimeFormatter formatter = context.getAttr(
                     JDateConstant.ATTR_FORMAT, JDateConstant.DEFAULT_FORMAT);
 
-            LocalDateTime dateTime = JDateUtils.toLocalDateTime(timestamp);
+            var dateTime = JDateUtils.toLocalDateTime(timestamp);
 
-            String result = formatter.format(dateTime);
+            var result = formatter.format(dateTime);
             context.stdout().println(result);
             return;
         }

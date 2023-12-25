@@ -14,12 +14,12 @@ import org.apache.commons.cli.HelpFormatter;
 public class JDate {
 
     public static void main(String[] args) {
-        HelpCommand helpCommand = new HelpCommand(new HelpFormatter(),
+        var helpCommand = new HelpCommand(new HelpFormatter(),
                 "默认格式化样式为: yyyy-MM-dd HH:mm:ss.SSS",
                 null,
                 false);
 
-        CommandExecutor executor = new CommandExecutorBuilder()
+        var executor = new CommandExecutorBuilder()
                 .setName("jdate")
                 .addCommand(
                         new CalendarCommand(),

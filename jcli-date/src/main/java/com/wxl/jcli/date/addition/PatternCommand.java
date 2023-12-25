@@ -25,7 +25,7 @@ public class PatternCommand extends AbstractCommand {
     @Override
     public void execute(CommandContext context, CommandChain chain) {
         if (isCurrentCommand(context)) {
-            String pattern = getRequireOptionValue(context, 0);
+            var pattern = getRequireOptionValue(context, 0);
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(pattern);
             context.setAttr(JDateConstant.ATTR_FORMAT, dateTimeFormatter);
         }

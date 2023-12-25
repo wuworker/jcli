@@ -16,7 +16,7 @@ public class CommandExecutorBuilder {
 
     private String name;
 
-    private List<Command> commands = new ArrayList<>();
+    private final List<Command> commands = new ArrayList<>();
 
     private CommandLineParser parser;
 

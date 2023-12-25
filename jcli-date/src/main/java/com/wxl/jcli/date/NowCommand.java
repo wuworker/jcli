@@ -23,9 +23,9 @@ public class NowCommand extends AbstractCommand {
 
     @Override
     public void execute(CommandContext context, CommandChain chain) {
-        DateTimeFormatter formatter = context.getAttr(JDateConstant.ATTR_FORMAT, JDateConstant.DEFAULT_FORMAT);
+        var formatter = context.getAttr(JDateConstant.ATTR_FORMAT, JDateConstant.DEFAULT_FORMAT);
 
-        LocalDateTime now = LocalDateTime.now();
+        var now = LocalDateTime.now();
 
         context.stdout().println(now.format(formatter));
         context.stdout().println(now.atZone(JDateConstant.DEFAULT_ZONE).toInstant().toEpochMilli());

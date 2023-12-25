@@ -15,7 +15,7 @@ import java.time.temporal.TemporalQueries;
  */
 public class JDateUtils {
 
-    private static DateTimeFormatter[] dateTimeFormatters = {
+    private static final DateTimeFormatter[] dateTimeFormatters = {
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"),
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"),
             DateTimeFormatter.ofPattern("yyyyMMddHHmmss"),
@@ -27,7 +27,7 @@ public class JDateUtils {
             DateTimeFormatter.ISO_ZONED_DATE_TIME
     };
 
-    private static DateTimeFormatter[] dateFormatters = {
+    private static final DateTimeFormatter[] dateFormatters = {
             DateTimeFormatter.ofPattern("yyyy-MM-dd"),
             DateTimeFormatter.ofPattern("yyyy年MM月dd日"),
             DateTimeFormatter.ofPattern("yyyyMMdd"),
@@ -36,7 +36,7 @@ public class JDateUtils {
             DateTimeFormatter.ISO_WEEK_DATE
     };
 
-    private static DateTimeFormatter[] timeFormatters = {
+    private static final DateTimeFormatter[] timeFormatters = {
             DateTimeFormatter.ofPattern("HH:mm:ss"),
             DateTimeFormatter.ofPattern("HH:mm:ss.SSS"),
             DateTimeFormatter.ofPattern("HHmmss"),
@@ -53,7 +53,7 @@ public class JDateUtils {
      */
     public static boolean isTimestamp(String date) {
         try {
-            long ts = Long.parseLong(date);
+            var ts = Long.parseLong(date);
             return ts >= 0;
         } catch (NumberFormatException e) {
             return false;
@@ -80,7 +80,7 @@ public class JDateUtils {
      * @return
      */
     public static LocalDateTime toLocalDateTime(long timestamp) {
-        Instant instant = Instant.ofEpochMilli(timestamp);
+        var instant = Instant.ofEpochMilli(timestamp);
         return LocalDateTime.ofInstant(instant, JDateConstant.DEFAULT_ZONE);
     }
 
@@ -91,7 +91,7 @@ public class JDateUtils {
      * @return
      */
     public static long toTimestamp(LocalDateTime dateTime) {
-        Instant instant = dateTime.atZone(JDateConstant.DEFAULT_ZONE).toInstant();
+        var instant = dateTime.atZone(JDateConstant.DEFAULT_ZONE).toInstant();
         return instant.toEpochMilli();
     }
 
@@ -134,10 +134,10 @@ public class JDateUtils {
      */
     public static LocalDateTime parseDateTime(String date) {
         if (isTimestamp(date)) {
-            Instant instant = Instant.ofEpochMilli(Long.parseLong(date));
+            var instant = Instant.ofEpochMilli(Long.parseLong(date));
             return LocalDateTime.ofInstant(instant, JDateConstant.DEFAULT_ZONE);
         }
-        DateTimeFormatter formatter = detectFormatter(date);
+        var formatter = detectFormatter(date);
         if (formatter == null) {
             return null;
         }
@@ -160,7 +160,7 @@ public class JDateUtils {
         LocalDate localDate;
         LocalTime localTime;
         try {
-            TemporalAccessor temporalAccessor = fmt.parse(date);
+            var temporalAccessor = fmt.parse(date);
             localDate = temporalAccessor.query(TemporalQueries.localDate());
             localTime = temporalAccessor.query(TemporalQueries.localTime());
             if (localDate == null && localTime == null) {

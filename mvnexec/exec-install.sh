@@ -5,6 +5,8 @@
 JCLI_HOME=$1
 if [ -z $JCLI_HOME ];then
   JCLI_HOME=~/.jcli
+fi
+if [ ! -d "$JCLI_HOME" ];then
   mkdir $JCLI_HOME
 fi
 

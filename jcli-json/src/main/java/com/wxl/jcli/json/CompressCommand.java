@@ -23,11 +23,10 @@ public class CompressCommand extends JsonCommand {
     @Override
     public void execute(CommandContext context, CommandChain chain) {
         if (isCurrentCommand(context)) {
-            JsonElement element = parseJson(context);
+            var element = parseJson(context);
 
-            GsonBuilder gsonBuilder = getGsonBuilder(context);
-            Gson gson = gsonBuilder.create();
-            String compressJson = gson.toJson(element);
+            var gson = getGsonBuilder(context).create();
+            var compressJson = gson.toJson(element);
 
             context.stdout().println(compressJson);
             return;

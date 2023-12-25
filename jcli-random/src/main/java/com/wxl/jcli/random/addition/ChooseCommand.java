@@ -23,7 +23,7 @@ public class ChooseCommand extends AbstractCommand {
     @Override
     public void execute(CommandContext context, CommandChain chain) {
         if (isCurrentCommand(context)) {
-            String candidateStr = getRequireOptionValue(context, 0);
+            var candidateStr = getRequireOptionValue(context, 0);
             context.setAttr(JRandomConstant.ATTR_CHOOSE, candidateStr);
         }
         chain.doNext(context);
