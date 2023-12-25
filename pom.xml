@@ -18,6 +18,8 @@
     <description>java实现的命令行工具</description>
 
     <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <revision>0.0.1-SNAPSHOT</revision>
         <cli.version>1.4</cli.version>
         <commons.lang3.version>3.12.0</commons.lang3.version>
